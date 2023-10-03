@@ -67,6 +67,41 @@ app.delete("/todos/:id",async(req,res)=>{
     }
 })
 
+//mark todo done 
+app.put("/todos/d/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const query = await pool.query('UPDATE todolist SET done = true WHERE todo_id = $1',[id]);
+
+        if (query.rowCount === 1) {
+            res.json({ message: 'Todo marked as done successfully' });
+            console.log('Todo marked as done!');
+        } else {
+            res.status(404).json({ error: 'Todo not found' });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
+app.put("/todos/ud/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const query = await pool.query('UPDATE todolist SET done = false WHERE todo_id = $1',[id]);
+
+        if (query.rowCount === 1) {
+            res.json({ message: 'Todo marked as undone successfully' });
+            console.log('Todo marked as undone!');
+        } else {
+            res.status(404).json({ error: 'Todo not found' });
+        }
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 
 //APP SETUP
 

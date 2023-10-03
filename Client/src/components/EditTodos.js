@@ -19,7 +19,7 @@ const EditTodo = ({todo}) => {
     }
 
     return <Fragment>
-            <button type="button" class="btn btn-warning" data-toggle="modal" data-target={`#id${todo.todo_id}`}>Edit</button>
+            <button type="button" className="btn btn-warning" data-toggle="modal" data-target={`#id${todo.todo_id}`}>Edit</button>
 
                 <div class="modal" id={`id${todo.todo_id}`}>
                     <div class="modal-dialog">
